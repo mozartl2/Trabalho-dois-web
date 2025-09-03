@@ -4,16 +4,10 @@
  box-sizing: border-box;
 }
 html {
-    background-color: white;
+    background-color: #F0F0F0;
 }
 
 body {
-    min-width: 100px;
-    max-width: 1000px;
-    margin: 0 auto;
-    background-color: rgb(213, 198, 178);
-}
 
-header {
-    background-color: #5cab4a;
+    background-color: rgb(213, 198, 178);
 }
