@@ -1,0 +1,4 @@
+- Função de alteração das fotos
+- Formulário de cadastro de clientes
+- Áudio descrição de imagens 
+- Carrinho e finalização de compras 
