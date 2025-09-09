@@ -8,3 +8,9 @@ document.querySelectorAll('.trocar-imagem').forEach(function(btn) {
         img.src = imagens[idx];
     });
 });
+
+document.querySelector('form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Cadastro enviado com sucesso!');
+    window.location.href = 'index.html';
+});

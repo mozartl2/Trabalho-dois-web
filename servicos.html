@@ -18,7 +18,7 @@
             <div class="mx-auto">
                 <h1 class="navbar-brand mb-0 h1">Mercado do zé</h1>
             </div>
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="form.html">
                 <i class="bi bi-person"></i>
             </a>
         </header>
@@ -27,43 +27,87 @@
             <a class="nav-link" href="produtos.html">Produtos</a>
             <a class="nav-link active" href="servicos.html">Serviços</a>
         </nav>
-<main class="flex-grow-1 py-5">
-    <div class="container">
-        <h3 class="text-center mb-5">Como deseja retirar os seus produtos?</h3>
-        <div class="row justify-content-center">
-            <!-- Card: Entrega das Compras -->
-            <div class="col-md-5 mb-4">
-                <div class="card h-100 text-center">
-                    <img src="imagens/entrega.jpg" class="card-img-top" alt="Entrega das Compras" style="height: 200px; object-fit: cover;">
-                    <div class="card-body">
-                        <h5 class="card-title">Entrega das Compras</h5>
-                        <p class="card-text">Receba suas compras no conforto da sua casa. O frete é calculado em R$ 2,00 por km.</p>
+        <main class="flex-grow-1 py-5">
+            <div class="container">
+                <h3 class="text-center mb-5">Como deseja retirar os seus produtos?</h3>
+                <form id="form-servico">
+                    <div class="row justify-content-center mb-4" id="cards-servico">
+                        <!-- Card: Entrega das Compras -->
+                        <div class="col-md-5 mb-4">
+                            <div class="card h-100 text-center card-selectable" data-servico="Entrega das Compras" style="cursor:pointer;">
+                                <img src="imagens/entrega.jpg" class="card-img-top" alt="Entrega das Compras" style="height: 200px; object-fit: cover;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Entrega das Compras</h5>
+                                    <p class="card-text">Receba suas compras no conforto da sua casa. O frete é calculado em R$ 2,00 por km.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card: Busca dos Produtos -->
+                        <div class="col-md-5 mb-4">
+                            <div class="card h-100 text-center card-selectable" data-servico="Busca dos Produtos" style="cursor:pointer;">
+                                <img src="imagens/loja.png" class="card-img-top" alt="Busca dos Produtos" style="height: 200px; object-fit: cover;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Busca dos Produtos</h5>
+                                    <p class="card-text">Agende um horário para retirar seus produtos na loja. Serviço gratuito!</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-footer bg-transparent border-0">
-                        <button class="btn btn-primary w-100">
-                            <i class="bi bi-calendar-check"></i> Agendar Entrega
-                        </button>
+                    <!-- Seleção de data e hora -->
+                    <div class="row justify-content-center mb-3">
+                        <div class="col-md-4">
+                            <label for="data" class="form-label">Data</label>
+                            <input type="date" class="form-control" id="data" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="hora" class="form-label">Hora</label>
+                            <input type="time" class="form-control" id="hora" required>
+                        </div>
                     </div>
-                </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary mt-2">Realizar Pedido</button>
+                    </div>
+                </form>
             </div>
-            <!-- Card: Busca dos Produtos -->
-            <div class="col-md-5 mb-4">
-                <div class="card h-100 text-center">
-                    <img src="imagens/loja.png" class="card-img-top" alt="Busca dos Produtos" style="height: 200px; object-fit: cover;">
-                    <div class="card-body">
-                        <h5 class="card-title">Busca dos Produtos</h5>
-                        <p class="card-text">Agende um horário para retirar seus produtos na loja. Serviço gratuito!</p>
-                    </div>
-                    <div class="card-footer bg-transparent border-0">
-                        <button class="btn btn-primary w-100">
-                            <i class="bi bi-calendar-check"></i> Agendar Retirada
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</main>
+            <style>
+                .card-selectable {
+                    border: 2px solid transparent;
+                    transition: border-color 0.2s;
+                }
+                .card-selectable.selected {
+                    border-color: #0d6efd;
+                    box-shadow: 0 0 0 0.2rem rgba(13,110,253,.25);
+                }
+            </style>
+            <script>
+                // Seleção dos cards
+                const cards = document.querySelectorAll('.card-selectable');
+                let cardSelecionado = null;
+                cards.forEach(card => {
+                    card.addEventListener('click', function() {
+                        cards.forEach(c => c.classList.remove('selected'));
+                        this.classList.add('selected');
+                        cardSelecionado = this.getAttribute('data-servico');
+                    });
+                });
+
+                // Validação do formulário
+                document.getElementById('form-servico').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const data = document.getElementById('data').value;
+                    const hora = document.getElementById('hora').value;
+                    if (!cardSelecionado) {
+                        alert('Selecione uma opção de serviço.');
+                        return;
+                    }
+                    if (!data || !hora) {
+                        alert('Selecione data e hora.');
+                        return;
+                    }
+                    alert(`Pedido realizado para "${cardSelecionado}" em ${data} às ${hora}!`);
+                });
+            </script>
+        </main>
         <!-- Footer igual ao das outras páginas -->
         <footer class="mt-auto text-center">
             <p class="text-footer">@2025 Minimercado do zé. Todos os direitos reservados | Contato email@teste.com | desenvolvido por <a href="https://github.com/mozartl2">Mozartl1</a></p>
